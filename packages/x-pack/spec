@@ -1,0 +1,5 @@
+---
+name: x-pack
+
+files:
+  - x-pack/x-pack-5.5.2.zip

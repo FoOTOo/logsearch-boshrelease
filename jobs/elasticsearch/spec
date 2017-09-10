@@ -4,6 +4,7 @@ name: elasticsearch
 packages:
   - elasticsearch
   - java8
+  - x-pack
 
 templates:
   bin/drain.erb: bin/drain

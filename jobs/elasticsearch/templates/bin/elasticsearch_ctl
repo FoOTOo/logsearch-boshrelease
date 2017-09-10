@@ -42,11 +42,11 @@ case $1 in
     rm -rf /var/vcap/packages/elasticsearch/plugins/*
     <% p("elasticsearch.plugins").each do |plugin| name, path = plugin.first %>
       <% if path.start_with? '/var/vcap' %>
-        /var/vcap/packages/elasticsearch/bin/elasticsearch-plugin install "file://<%= path %>"
+        /var/vcap/packages/elasticsearch/bin/elasticsearch-plugin install --batch "file://<%= path %>"
       <% elsif path.start_with? 'http' %>
-        /var/vcap/packages/elasticsearch/bin/elasticsearch-plugin install "<%= path %>"
+        /var/vcap/packages/elasticsearch/bin/elasticsearch-plugin install --batch "<%= path %>"
       <% else %>
-        /var/vcap/packages/elasticsearch/bin/elasticsearch-plugin install "<%= path %>"
+        /var/vcap/packages/elasticsearch/bin/elasticsearch-plugin install --batch "<%= path %>"
       <% end %>
     <% end %>
 

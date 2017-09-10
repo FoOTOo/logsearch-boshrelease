@@ -3,6 +3,7 @@ name: kibana
 
 packages:
   - kibana
+  - x-pack
 
 templates:
   bin/kibana_ctl: bin/kibana_ctl

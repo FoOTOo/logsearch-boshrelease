@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# x-pack-5.5.2.zip
+
+package='x-pack'
+version='5.5.2'
+file="$package-$version.zip"
+url="https://artifacts.elastic.co/downloads/packs/x-pack/$file"
+
+if [ ! -s "$package/$file" ]; then
+  mkdir -p "$package"
+  wget -qO "$package/$file" --content-disposition "$url"
+fi
+
+exit 0
