@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 set -e
 
@@ -26,8 +26,6 @@ prepare_blobs() {
   [ -d "${releasePath}/blobs" ] || mkdir "${releasePath}/blobs"
   echo "Preparing all packages..."
 
-  git submodule update --init --recursive
-
   #find -path './packages/*' -name prepare -type f -exec bash -c "[ -s ${releasePath}/blobs/${0:2} ] && ( echo $releasePath/blobs/${0:2}; cd ${releasePath}/blobs ; $SHELL ${releasePath}/${0:2} )" {} \;
   for prep in $(find -path './packages/*' -name prepare -type f)
   do
@@ -48,8 +46,9 @@ prepare_dev_release() {
   bosh -n upload release
 }
 
+releasePath=$(cd $(dirname $0)/../ ; echo $PWD)
 
-bosh_target_check
-bosh_cli_check
+# bosh_target_check
+# bosh_cli_check
 
 prepare_blobs
