@@ -246,6 +246,32 @@ properties:
     master_hosts: (( grab jobs.elasticsearch_master.networks.default.static_ips ))
     cluster_name: logsearch
     exec: ~
+    plugins:
+      - x-pack: /var/vcap/packages/x-pack/x-pack-5.5.2.zip # IMPORTANT: also need to add this in the logsearch-for-cloudfoundry/templates/stub.xxxxx.yml kibana.plugins
+    config_options: |
+      xpack.monitoring.enabled: false
+      xpack.security.enabled: false
+      xpack.ml.enabled: false
+      xpack.notification.email.account:
+        email_account:
+          email_defaults:
+            from: EMAIL_ADDR
+          smtp:
+            auth: true
+            starttls.enable: true
+            starttls.required: true
+            host: EMAIL_HIST
+            port: 587
+            user: EMAIL_ADDR
+            password: EMAIL_PASSWD
+  kibana:
+    health:
+      disable_post_start: true # "Optimizing and caching browser bundles..." may take a long time to finish, /jobs/kibana/templates/bin/post-start.erb only wait for 300sec by default, which may not be enough, so just disable it.
+    config_options: |
+      xpack.monitoring.enabled: false
+      xpack.security.enabled: false
+      xpack.ml.enabled: false
+      xpack.graph.enabled: false
   elasticsearch_config:
     elasticsearch:
       host: (( grab jobs.elasticsearch_master.networks.default.static_ips.[0] ))

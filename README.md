@@ -1,5 +1,20 @@
 # Logsearch
 
+Added x-pack plugin to the original cloudfoundry-community/logsearch-boshrelease.
+
+About the default templates: 
+1. you need to add `- x-pack: /var/vcap/packages/x-pack/x-pack-5.5.2.zip` to `logsearch-for-cloudfoundry/templates/stub.xxxxx.yml properties/kibana/plugins` to make x-pack installed in Kibana
+2. `monitoring` `security` `ml` `graph` are all *DISABLED* and NOT tested, because I only need `watcher` with email notification.
+3. `kibana.health.disable_post_start` is `true` in the default template, after a successful bosh deploy, you may still need to wait for several minutes until Kibana finishes its optimization.
+
+
+To build release: 
+1. `./script/prepare`
+2. `bosh create release --force --with-tarball`
+3. `bosh upload release`
+
+--
+
 A scalable stack of [Elasticsearch](http://www.elasticsearch.org/overview/elasticsearch/),
 [Logstash](http://www.elasticsearch.org/overview/logstash/), and
 [Kibana](http://www.elasticsearch.org/overview/kibana/) for your

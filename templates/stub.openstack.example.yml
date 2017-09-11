@@ -4,9 +4,9 @@ meta:
     compilation: m1.medium
     elasticsearch: m1.medium
     ingestor: m1.small
-    kibana: m1.small
+    kibana: m1.medium # use medium to speed up "Optimizing and caching browser bundles..."
     maintenance: m1.small
-    monitor: m1.small
+    monitor: m1.medium # if use m1.small(1C2G), kibana may fail at "Optimizing and caching browser bundles..." due to out of memory
     haproxy: m1.small
     errand: m1.small
   stemcell:
